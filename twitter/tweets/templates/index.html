@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<title>Twitter page (Anonymous version)</title>
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Anonymous Twitter</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link disabled" href="#">Features</a>
+      <a class="nav-item nav-link disabled" href="#">Pricing</a>
+     
+    </div>
+  </div>
+</nav>
+<!-- Main content section -->
+<br>
+<div class="container-fluid">
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      
+    </div>
+    <div class="col-md-6">
+      <form action="tweet/" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Screen Name:</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="anonymous sherlock">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Title:</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="title" placeholder="Hard to be a developer">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Your tweet:</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="message" placeholder="Write what you want here!" rows="3"></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit Message"/>
+      </form>
+      <br>
+      <div class="container" align="center">
+        <h3>Anonymous Tweets</h3>
+            {% if tweets %}
+            {% for tweet in tweets  %}
+            <div class="card text-white bg-primary mb-3" >
+                <div class="card-header">Tweet #{{tweet.id}}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{tweet.title}}</h5>
+                    <p class="card-text">{{tweet.message}} <br>by {{tweet.name}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h4>No tweets!<h4>
+            {% endif %}
+      </div>
+    </div>
+    <div class="col-md">
+      
+    </div>
+  </div>
+</div>
+</div>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/popper.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
